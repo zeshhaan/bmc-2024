@@ -1,47 +1,9 @@
-# Astro Starter Kit: Minimal
+## Explanation of the design decisions
 
-```sh
-npm create astro@latest -- --template minimal
-```
+#### Astro as static site generator
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+Used Astro because its a lot faster to setup, it allows me to just start prototyping without thinking about framework constraints. When I need to have a feature that requires a framework, I can just add it in. Also I can mix and match different frameworks if I want to. For example, there is a library that I want to use that is only available in React, I can just add React to the project and use it.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+#### Tailwind CSS
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Used TailwindCSS instead of hardcoding CSS because it is a lot faster to prototype with. I can just add classes to the HTML and see the changes immediately. Also, it is a lot easier to maintain because I can see all the styles that are being used in the HTML file. Also I don't miss the traditional CSS because I can still use it if I want to.
