@@ -1,0 +1,36 @@
+---
+const { variant = "primary", size = "md", class: className } = Astro.props;
+
+const sizeClasses = {
+  sm: "px-3 py-1.5 text-sm",
+  md: "px-4 py-2 text-base",
+  lg: "px-6 py-3 text-lg",
+};
+
+const variantClasses: Record<string, { base: string; hover: string }> = {
+  primary: {
+    base: "bg-primary text-white",
+    hover: "hover:bg-[#9B62E0]",
+  },
+  secondary: {
+    base: "bg-[EBEBEB]/60 text-black",
+    hover: "hover:bg-gray-300",
+  },
+  outline: {
+    base: "border border-[#E1D6D6] text-black",
+    hover: "hover:bg-gray-200",
+  },
+};
+---
+
+<button
+  class:list={[
+    "rounded-full transition-colors duration-300",
+    sizeClasses[size as keyof typeof sizeClasses],
+    variantClasses[variant as keyof typeof variantClasses].base,
+    variantClasses[variant as keyof typeof variantClasses].hover,
+    className,
+  ]}
+>
+  <slot />
+</button>

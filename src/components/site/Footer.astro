@@ -1,0 +1,100 @@
+---
+const footerLinks = [
+  {
+    title: "Company",
+    links: [
+      { name: "About", href: "#" },
+      { name: "Privacy", href: "#" },
+      { name: "Privacy & Terms", href: "#" },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      { name: "Chat with us", href: "#" },
+      { name: "Help center", href: "#" },
+      { name: "Feature request", href: "#" },
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      { name: "Twitter", href: "#" },
+      { name: "Facebook", href: "#" },
+      { name: "Discord", href: "#" },
+    ],
+  },
+  {
+    title: "More",
+    links: [
+      { name: "Buttons", href: "#" },
+      { name: "Brand assets", href: "#" },
+      { name: "Careers", href: "#" },
+    ],
+  },
+];
+---
+
+<footer class="bg-white" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">Footer</h2>
+  <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
+    <div class="xl:grid xl:grid-cols-[0.5fr_1fr_1fr] xl:gap-8">
+      <div class="space-y-8">
+        <img class="h-7" src="/logo.svg" alt="Company name" />
+      </div>
+      <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            footerLinks.slice(0, 2).map((footerLink) => (
+              <div>
+                <h3 class="text-sm font-semibold leading-6 text-gray-900">
+                  {footerLink.title}
+                </h3>
+                <ul role="list" class="mt-6 space-y-4">
+                  {footerLink.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            footerLinks.slice(2, 4).map((footerLink) => (
+              <div>
+                <h3 class="text-sm font-semibold leading-6 text-gray-900">
+                  {footerLink.title}
+                </h3>
+                <ul role="list" class="mt-6 space-y-4">
+                  {footerLink.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        class="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
+      <p class="text-xs leading-5 text-gray-500">
+        &copy; 2024. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

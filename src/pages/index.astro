@@ -1,18 +1,16 @@
 ---
 import WebsiteLayout from "@layouts/WebsiteLayout.astro";
+import Header from "@components/site/Header.astro";
+import Hero from "@components/site/Hero.astro";
+import Features from "@components/site/Features.astro";
+import Carousal from "@components/site/Carousal/index.astro";
+import Footer from "@components/site/Footer.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Creator</title>
-  </head>
-  <body>
-    <WebsiteLayout>
-      <slot />
-    </WebsiteLayout>
-  </body>
-</html>
+<WebsiteLayout>
+  <Header />
+  <Hero />
+  <Features />
+  <Carousal />
+  <Footer />
+</WebsiteLayout>

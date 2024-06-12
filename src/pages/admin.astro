@@ -1,18 +1,12 @@
 ---
 import AppLayout from "../layouts/AppLayout.astro";
+import Header from "@components/site/Header.astro";
+import Table from "@components/app/Table/index";
+import { Toaster } from "sonner";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Creator - Admin</title>
-  </head>
-  <body>
-    <AppLayout>
-      <slot />
-    </AppLayout>
-  </body>
-</html>
+<AppLayout>
+  <Header variant="app" />
+  <Table client:load />
+  <Toaster client:load richColors />
+</AppLayout>

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    font-size: 60px;
+    font-weight: 600;
+  }
+  h2 {
+    font-size: 55px;
+    font-weight: 600;
+  }
+  h4 {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 400;
+  }
+  a {
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
