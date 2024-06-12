@@ -4,19 +4,15 @@ import { useInView } from "react-intersection-observer";
 import AlertDialog from "../AlertDialog";
 import EditCreatorDialog from "./EditCreatorDialog";
 import AddCreatorDialog from "./AddNewCreatorDialog";
+import StatsDialog from "./StatsDialog";
 import Button from "../Button";
 import { toast } from "sonner";
-
-interface TData {
-  id: number;
-  name: string;
-  email: string;
-  gender: string;
-  status: string;
-}
+import { Icon } from "@iconify/react";
+import type { TData } from "src/types/user";
 
 const DataTable = () => {
   const { ref } = useInView();
+
   const fetchCreatorsWithPagination = async ({ pageParam = 1 }) => {
     const response = await fetch(
       `https://gorest.co.in/public/v2/users?page=${pageParam}`
@@ -59,10 +55,63 @@ const DataTable = () => {
       if (response.ok) {
         refetch();
       } else {
-        // Handle deletion error
+        toast.error("Something went wrong. Please try again.");
       }
     } catch (error) {
-      // Handle network error
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
+  const handleUpdate = async (updatedCreator: TData) => {
+    try {
+      const response = await fetch(`api/user/${updatedCreator.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedCreator),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        refetch();
+        toast.success(`Creator ${updatedCreator.name} has been updated.`);
+      } else {
+        if (data.status === 422) {
+          toast.warning("Email has already taken. Please try another email.");
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
+  const handleCreate = async (newCreator: Omit<TData, "id">) => {
+    console.log(newCreator);
+    try {
+      const response = await fetch("api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCreator),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        refetch();
+        toast.success(`Creator ${newCreator.name} has been added.`);
+      } else {
+        if (data.status === 422) {
+          toast.warning(
+            "User with this email already exists. Please try another email."
+          );
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
@@ -83,10 +132,8 @@ const DataTable = () => {
               <h4 className=" leading-6 text-gray-900">Manage creators</h4>
             </div>
             <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none grid gap-2 grid-flow-col">
-              <Button icon="hugeicons:analytics-01" size="md" variant="outline">
-                View stats
-              </Button>
-              <AddCreatorDialog />
+              <StatsDialog creators={data.pages} />
+              <AddCreatorDialog onAdd={handleCreate} />
             </div>
           </div>
 
@@ -155,7 +202,10 @@ const DataTable = () => {
                                 </span>
                               </td>
                               <td className="relative whitespace-nowrap grid grid-flow-col gap-4 border-b border-gray-200 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8">
-                                <EditCreatorDialog creator={creator} />
+                                <EditCreatorDialog
+                                  creator={creator}
+                                  onUpdate={handleUpdate}
+                                />
                                 <AlertDialog
                                   icon="flowbite:trash-bin-solid"
                                   title="Are you absolutely sure?"
@@ -176,18 +226,21 @@ const DataTable = () => {
                     </tbody>
                   </table>
                 </div>
-                <button
+                <Button
                   ref={ref}
                   onClick={() => fetchNextPage()}
                   disabled={!hasNextPage || isFetchingNextPage}
-                  className=""
+                  variant="secondary"
+                  className="mt-4 self-center"
+                  size="md"
                 >
                   {isFetchingNextPage
                     ? "Loading more..."
                     : hasNextPage
-                    ? "Load Newer"
+                    ? "Load more"
                     : "Nothing more to load"}
-                </button>
+                  <Icon icon="lucide:chevron-down" />
+                </Button>
               </div>
             </div>
           </div>

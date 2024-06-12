@@ -2,24 +2,7 @@ import type { APIRoute } from "astro";
 
 export const POST: APIRoute = async ({ request }) => {
   console.log("POST request received");
-  const data = await request.formData();
-  const name = data.get("name");
-  const email = data.get("email");
-  const gender = data.get("gender");
-  const status = data.get("status");
-
-  if (!name || !email || !gender || !status) {
-    return new Response(
-      JSON.stringify({ message: "All fields are required" }),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  }
-
+  const data = await request.json();
   try {
     const response = await fetch("https://gorest.co.in/public/v2/users", {
       method: "POST",
@@ -27,7 +10,7 @@ export const POST: APIRoute = async ({ request }) => {
         Authorization: `Bearer ${import.meta.env.API_TOKEN}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, email, gender, status }),
+      body: JSON.stringify(data),
     });
     if (response.ok) {
       const userData = await response.json();
@@ -46,13 +29,16 @@ export const POST: APIRoute = async ({ request }) => {
       );
     } else {
       const errorData = await response.json();
-      return new Response(JSON.stringify({ message: errorData }), {
-        status: response.status,
-        statusText: response.statusText,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      return new Response(
+        JSON.stringify({ message: errorData, status: response.status }),
+        {
+          status: response.status,
+          statusText: response.statusText,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
   } catch (error) {
     return new Response(

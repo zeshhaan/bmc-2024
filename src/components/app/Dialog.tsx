@@ -11,7 +11,7 @@ interface DialogProps {
     label: string;
   };
   modalTitle: string;
-  modalDescription: string;
+  modalDescription?: string;
   children: React.ReactNode;
   isDialogOpen: boolean;
   setIsDialogOpen: (open: boolean) => void;

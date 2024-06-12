@@ -1,25 +1,22 @@
 import { useState, type FormEvent } from "react";
 import Dialog from "../Dialog";
-import { toast } from "sonner";
+import type { TData } from "src/types/user";
 
-const AddCreatorDialog = () => {
+const AddCreatorDialog = ({
+  onAdd,
+}: {
+  onAdd: (newCreator: Omit<TData, "id">) => void;
+}) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const response = await fetch("/api/user", {
-      method: "POST",
-      body: formData,
-    });
-    const data = await response.json();
-    if (response.ok) {
-      console.log(data);
-      toast.success(data.message);
-      setIsDialogOpen(false);
-    } else {
-      console.log(data);
-      toast.warning(`${data.message[0].field} ${data.message[0].message}`);
-    }
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const gender = formData.get("gender") as string;
+    const status = formData.get("status") as string;
+
+    onAdd({ name, email, gender, status });
   }
   return (
     <Dialog

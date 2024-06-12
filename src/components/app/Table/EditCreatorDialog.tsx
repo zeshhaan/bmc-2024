@@ -2,12 +2,19 @@ import { useState, type FormEvent } from "react";
 import Dialog from "../Dialog";
 import type { TData } from "src/types/user";
 
-const EditCreatorDialog = ({ creator }: { creator: TData }) => {
+const EditCreatorDialog = ({
+  creator,
+  onUpdate,
+}: {
+  creator: TData;
+  onUpdate: (updatedCreator: TData) => void;
+}) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const [name, setName] = useState(creator.name);
   const [email, setEmail] = useState(creator.email);
   const [gender, setGender] = useState(creator.gender);
   const [status, setStatus] = useState(creator.status);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -25,8 +32,17 @@ const EditCreatorDialog = ({ creator }: { creator: TData }) => {
     setStatus(e.target.value);
   };
 
-  async function submit(e: FormEvent<HTMLFormElement>) {}
-
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const updatedCreator = {
+      id: creator.id,
+      name,
+      email,
+      gender,
+      status,
+    };
+    onUpdate(updatedCreator);
+  }
   return (
     <Dialog
       isDialogOpen={isDialogOpen}
@@ -143,7 +159,7 @@ const EditCreatorDialog = ({ creator }: { creator: TData }) => {
             type="submit"
             className="bg-green-100 text-green-700 hover:bg-green-200 focus:shadow-green-600 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
           >
-            Save changes
+            Update creator
           </button>
         </div>
       </form>
