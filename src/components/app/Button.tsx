@@ -23,7 +23,7 @@ const Button = ({
   };
 
   const variantClasses: { [key: string]: string } = {
-    primary: "bg-primary text-white hover:bg-primary/0",
+    primary: "bg-primary text-white hover:bg-primary/90",
     secondary: "bg-[#EBEBEB]/60 text-black hover:bg-gray-300",
     outline: "border border-[#E1D6D6] text-black hover:bg-gray-100",
     ghost: "text-[#717171] hover:bg-gray-100",
