@@ -1,29 +1,33 @@
 ---
 import Button from "@components/common/Button.astro";
+import CustomInput from "@components/site/CustomInput.astro";
 import { Image } from "astro:assets";
 const { variant } = Astro.props;
 ---
 
-<header class="bg-white border-b">
+<header class="relative z-[12] border-b">
   <nav
     class="mx-auto flex items-center justify-between p-6 lg:px-8"
     aria-label="Global"
   >
     <div class="flex items-center gap-x-12">
-      <a href="#" class="-m-1.5 p-1.5">
+      <a href="/" class="-m-1.5 p-1.5">
         <span class="sr-only">Your Company</span>
         <img class="h-8 w-auto" src="/logo.svg" alt="" />
       </a>
       <div class="hidden lg:flex lg:gap-x-12">
-        <a href="#" class="text-sm leading-6 text-[#222]">Home</a>
+        <a href="/" class="text-sm leading-6 text-[#222]">Home</a>
         <a href="#" class="text-sm leading-6 text-[#222]">Features</a>
-        <a href="#" class="text-sm leading-6 text-[#222]">Explore creators</a>
+        <a href="/admin" class="text-sm leading-6 text-[#222]"
+          >Explore creators</a
+        >
         <a href="#" class="text-sm leading-6 text-[#222]">FAQ</a>
       </div>
     </div>
     <div class="flex lg:hidden">
       <button
         type="button"
+        id="mobileMenuOpen"
         class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
       >
         <span class="sr-only">Open main menu</span>
@@ -61,17 +65,19 @@ const { variant } = Astro.props;
           </div>
         ) : (
           <>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">
+            <CustomInput leftCta placeholder="Search for creators" />
+
+            <Button variant="outline" class="min-w-24">
               Sign in
-            </a>
-            <Button>Sign up</Button>
+            </Button>
+            <Button class="min-w-24">Sign up</Button>
           </>
         )
       }
     </div>
   </nav>
   <!-- Mobile menu, show/hide based on menu open state. -->
-  <div class="hidden" role="dialog" aria-modal="true">
+  <div id="mobileMenu" class="hidden" role="dialog" aria-modal="true">
     <!-- Background backdrop, show/hide based on slide-over state. -->
     <div class="fixed inset-0 z-10"></div>
     <div
@@ -82,7 +88,11 @@ const { variant } = Astro.props;
           <span class="sr-only">Your Company</span>
           <img class="h-8 w-auto" src="/logo.svg" alt="" />
         </a>
-        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+        <button
+          type="button"
+          id="mobileMenuClose"
+          class="-m-2.5 rounded-md p-2.5 text-gray-700"
+        >
           <span class="sr-only">Close menu</span>
           <svg
             class="h-6 w-6"
@@ -135,3 +145,42 @@ const { variant } = Astro.props;
     </div>
   </div>
 </header>
+
+<script>
+  // This script will only run on the client side
+  const mobileMenuOpen = document.getElementById("mobileMenuOpen");
+  const mobileMenuClose = document.getElementById("mobileMenuClose");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  function openMobileMenu() {
+    if (mobileMenu) {
+      mobileMenu.classList.remove("hidden");
+      document.body.style.overflow = "hidden"; // Prevent scrolling when menu is open
+    }
+  }
+
+  function closeMobileMenu() {
+    if (mobileMenu) {
+      mobileMenu.classList.add("hidden");
+      document.body.style.removeProperty("overflow"); // Restore scrolling
+    }
+  }
+
+  if (mobileMenuOpen) {
+    mobileMenuOpen.addEventListener("click", openMobileMenu);
+  }
+
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener("click", closeMobileMenu);
+  }
+</script>
+
+<style>
+  /* Add this to your component's <style> or in your global CSS */
+  #mobileMenu {
+    transition: opacity 0.3s ease-in-out;
+  }
+  #mobileMenu.opacity-0 {
+    opacity: 0;
+  }
+</style>
