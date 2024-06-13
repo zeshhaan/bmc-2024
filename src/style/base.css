@@ -28,4 +28,25 @@
     font-weight: 500;
     line-height: 1;
   }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(calc(-50% - (max(16px, 2vw) * 2)));
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .logo-slider {
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        white 10vw,
+        white calc(100% - 10vw),
+        transparent
+      );
+    }
+  }
 }
