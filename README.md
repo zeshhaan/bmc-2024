@@ -32,4 +32,4 @@ I would normally would reach out to Vue as it makes things easier and the syntax
 
 #### What could have done better
 
-Ofc there are always things that could have been improved here, from animating the svg on the hero and the feature section, making the nav sticky, adding a dark mode, showing drawer bottom sheets on mobile instead of dialog modal etc. Also, I could have added more functionalities to the table such as selecting multiple rows, sorting, filtering, search etc but I wanted to keep it simple and focused on the main features.
+Ofc there are always things that could have been improved here, from animating the svg on the hero and the feature section, making the nav sticky, adding a dark mode, showing drawer bottom sheets on mobile instead of dialog modal, empty screen, error screen, loading screen etc. Also, I could have added more functionalities to the table such as selecting multiple rows, sorting, filtering, search etc but I wanted to keep it simple and focused on the main features.
