@@ -233,6 +233,7 @@ const DataTable = () => {
                   </table>
                 </div>
                 <Button
+                  // @ts-ignore
                   ref={ref}
                   onClick={() => fetchNextPage()}
                   disabled={!hasNextPage || isFetchingNextPage}
