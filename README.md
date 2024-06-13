@@ -28,7 +28,7 @@ Used TailwindCSS instead of hardcoding CSS because it is a lot faster to prototy
 
 #### React for complexity
 
-This time I wanted to suffer a bit after being relaxing on Vue land, so i tried React. Just kidding - I would normally would reach out to Vue as it makes things easier and the syntax is closer to HTML. We no need to specify className, htmlFor, etc also we can write css in a single file because of SFC. But here I chose React because I didn't use it for a long time. I used React for the table listing, using the incredible Tanstack Query to setup infinite loading and managing the cache during form submission. Also on the auto play slider, I used React when my initial effort to get it working with HTML/TailwindCSS didn't played out well.
+This time I wanted to suffer a bit after being relaxing on Vue land, so I tried React again. Just kidding - I would normally would reach out to Vue as it makes things easier and the syntax is closer to HTML. We no need to specify className, htmlFor, etc also we can write css in a single file because of SFC. But here I chose React because I didn't use it for a long time. I used React for the table listing, using the incredible Tanstack Query to setup infinite loading and managing the cache during form submission. Also on the auto play slider, I used React when my initial effort to get it working with HTML/TailwindCSS didn't played out well.
 
 #### What could have done better
 
