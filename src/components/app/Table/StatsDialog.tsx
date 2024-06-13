@@ -86,7 +86,7 @@ const StatsDialog = ({ creators }: { creators: TData[][] }) => {
       }}
       modalTitle="Stats"
     >
-      <div className="flex divide-x divide-gray-200">
+      <div className="flex flex-col md:flex-row divide-y md:divide-x md:divide-y-0 divide-gray-200">
         <div className="flex-1 text-center">
           <Chart
             chartType="PieChart"
@@ -96,7 +96,7 @@ const StatsDialog = ({ creators }: { creators: TData[][] }) => {
             height={"200px"}
           />
         </div>
-        <div className="flex-1 text-start flex flex-col justify-center px-4">
+        <div className="flex-1 text-start flex flex-col justify-center py-4 md:px-4 md:py-0">
           <select
             value={selectedOption}
             className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary sm:text-sm sm:leading-6"
