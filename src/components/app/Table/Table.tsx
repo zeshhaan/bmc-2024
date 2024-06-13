@@ -6,6 +6,7 @@ import EditCreatorDialog from "./EditCreatorDialog";
 import AddCreatorDialog from "./AddNewCreatorDialog";
 import StatsDialog from "./StatsDialog";
 import Button from "../Button";
+import LoadingButton from "../LoadingButton";
 import { toast } from "sonner";
 import { Icon } from "@iconify/react";
 import type { TData } from "src/types/user";
@@ -115,7 +116,12 @@ const DataTable = () => {
     }
   };
 
-  if (status === "pending") return <div>Loading...</div>;
+  if (status === "pending")
+    return (
+      <div className="h-screen w-full flex items-center justify-center">
+        <LoadingButton />
+      </div>
+    );
   if (status === "error") return <div>Error: {error.message}</div>;
 
   return (
