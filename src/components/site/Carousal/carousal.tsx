@@ -126,13 +126,13 @@ const MarqueeSlider = () => {
     window.addEventListener("resize", updateVariableDuration);
     updateVariableDuration();
 
-    const sliderContentElement = sliderContent.current as HTMLElement | null;
-    if (sliderContentElement) {
-      const children = Array.from(sliderContentElement.children);
-      children.forEach((child) => {
-        sliderContentElement.appendChild(child.cloneNode(true));
-      });
-    }
+    // const sliderContentElement = sliderContent.current as HTMLElement | null;
+    // if (sliderContentElement) {
+    //   const children = Array.from(sliderContentElement.children);
+    //   children.forEach((child) => {
+    //     sliderContentElement.appendChild(child.cloneNode(true));
+    //   });
+    // }
 
     return () => {
       window.removeEventListener("resize", updateVariableDuration);
